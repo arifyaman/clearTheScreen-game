@@ -1,55 +1,73 @@
 package com.xlipstudio.cleanthescreen.client;
 
 import com.xlipstudio.cleanthescreen.communication.Wrap;
+import com.xlipstudio.cleanthescreen.communication.request.Request;
+import com.xlipstudio.cleanthescreen.communication.request.RequestType;
 import com.xlipstudio.cleanthescreen.communication.sub.WrapType;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class GameClient{
+public class GameClient extends Thread{
     private Socket socket = null;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
+    private String clientId = "";
+    private GameClientCallbacks gameClientCallbacks;
 
 
-    public GameClient() {
 
+    public GameClient(GameClientCallbacks gameClientCallbacks) {
+        this.gameClientCallbacks = gameClientCallbacks;
         try {
             socket = new Socket("localhost", 36813);
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
             this.inputStream = new ObjectInputStream(socket.getInputStream());
-            join();
-            new Listener().start();
+            this.clientId = "a8ys791238hwdmf";
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    private void read() {
+        while (true) {
+            try {
+                Wrap wrap = ((Wrap) inputStream.readObject());
+                GameClient.this.processWrap(wrap);
+            } catch (IOException e) {
 
-    private class Listener extends Thread {
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Wrap wrap = ((Wrap) inputStream.readObject());
-                    System.out.println(wrap.getWrapType());
-                } catch (IOException e) {
-
-                }catch (Exception e2) {
-
-                }
+            }catch (Exception e2) {
 
             }
+
         }
+
     }
 
-    public void join() {
-       Wrap wrap = new Wrap();
-       wrap.setWrapType(WrapType.JOIN);
-       dispatchWrap(wrap);
+    @Override
+    public void run() {
+        read();
     }
+
+    public  void processWrap(Wrap wrap) {
+        gameClientCallbacks.wrapReceived(wrap);
+    }
+
+    public void register() {
+        Wrap wrap = new Wrap();
+        wrap.setWrapType(WrapType.REQUEST);
+
+        Request request = new Request();
+        request.setRequestType(RequestType.REGISTER);
+        request.setPayload(clientId);
+        wrap.setRequest(request);
+        dispatchWrap(wrap);
+
+
+    }
+
 
     public void dispatchWrap(Wrap wrap) {
         try {
@@ -57,6 +75,10 @@ public class GameClient{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public interface GameClientCallbacks{
+        void wrapReceived(Wrap wrap);
     }
 
 

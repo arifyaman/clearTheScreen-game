@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.xlip.threedtemp.Input.MyInputProcessor;
-import com.xlip.threedtemp.Screen.Screen;
 import com.xlip.threedtemp.Settings.Settings;
-import com.xlipstudio.cleanthescreen.client.GameClient;
 import com.xlipstudio.cleanthescreen.communication.Wrap;
 import com.xlipstudio.cleanthescreen.objects.Cell;
 
@@ -37,8 +35,8 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         MyInputProcessor processor = new MyInputProcessor(this);
         processor.setMyInputCallback(this);
         Gdx.input.setInputProcessor(processor);
-
     }
+
 
     private void initCells() {
 
@@ -98,7 +96,6 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     void sendRemoveCellReq(Cell cell) {
 
 
-
     }
 
     private void checkCells(Vector2 pos) {
@@ -108,6 +105,11 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
                 cells.removeValue(cell, true);
             }
         }
+    }
+
+    @Override
+    public void wrapReceived(Wrap wrap) {
+
     }
 
 
