@@ -8,6 +8,10 @@ public abstract class Screen extends com.xlip.threedtemp.Screen.Screen {
 
     }
 
+    public void initialized(Object object){
+
+    }
+
     public void wrapReceived(Wrap wrap){
         System.out.println(wrap.getResponse().getMessage() + "  " + wrap.getResponse().getCode());
     }

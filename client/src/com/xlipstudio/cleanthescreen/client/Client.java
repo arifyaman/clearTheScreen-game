@@ -5,11 +5,12 @@ import com.xlipstudio.cleanthescreen.communication.request.Request;
 import com.xlipstudio.cleanthescreen.communication.request.RequestType;
 import com.xlipstudio.cleanthescreen.communication.sub.WrapType;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
-public class GameClient extends Thread{
+public class Client extends Thread implements GameClient {
     private Socket socket = null;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
@@ -17,14 +18,14 @@ public class GameClient extends Thread{
     private GameClientCallbacks gameClientCallbacks;
 
 
-
-    public GameClient(GameClientCallbacks gameClientCallbacks) {
+    public Client(GameClientCallbacks gameClientCallbacks, String clientId) {
         this.gameClientCallbacks = gameClientCallbacks;
         try {
             socket = new Socket("localhost", 36813);
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
             this.inputStream = new ObjectInputStream(socket.getInputStream());
-            this.clientId = "a8ys791238hwdmf";
+            this.clientId = clientId;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,10 +36,17 @@ public class GameClient extends Thread{
         while (true) {
             try {
                 Wrap wrap = ((Wrap) inputStream.readObject());
-                GameClient.this.processWrap(wrap);
+                Client.this.processWrap(wrap);
             } catch (IOException e) {
-
-            }catch (Exception e2) {
+                e.printStackTrace();
+                try {
+                    socket.close();
+                    break;
+                } catch (IOException x) {
+                    x.printStackTrace();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
 
             }
 
@@ -51,7 +59,7 @@ public class GameClient extends Thread{
         read();
     }
 
-    public  void processWrap(Wrap wrap) {
+    public void processWrap(Wrap wrap) {
         gameClientCallbacks.wrapReceived(wrap);
     }
 
@@ -75,10 +83,6 @@ public class GameClient extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public interface GameClientCallbacks{
-        void wrapReceived(Wrap wrap);
     }
 
 

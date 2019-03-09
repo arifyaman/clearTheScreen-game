@@ -6,7 +6,7 @@ import com.xlip.threedtemp.Settings.Settings;
 import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
 import com.xlipstudio.cleanthescreen.client.Client;
 
-public class DesktopLauncher {
+public class DesktopLauncher2 {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Settings.appwidth;
@@ -17,7 +17,7 @@ public class DesktopLauncher {
 
 
 		CleanTheScreenGame game = new CleanTheScreenGame();
-		Client client = new Client(game, "a8ys791238hwdmf");
+		Client client = new Client(game, "bchshY45923cz");
 		CleanTheScreenGame.setGameClient(client);
 
 

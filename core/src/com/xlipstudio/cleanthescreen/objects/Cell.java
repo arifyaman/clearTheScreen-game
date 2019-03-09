@@ -10,6 +10,7 @@ public class Cell {
     private float x;
     private float y;
     private Color color;
+    private boolean destroyed;
 
     public Cell(long id) {
         this.id = id;
@@ -61,5 +62,13 @@ public class Cell {
         }
         return false;
 
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
     }
 }

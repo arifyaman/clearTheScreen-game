@@ -9,9 +9,8 @@ import com.xlipstudio.cleanthescreen.communication.Wrap;
 import com.xlipstudio.cleanthescreen.communication.request.Request;
 import com.xlipstudio.cleanthescreen.communication.request.RequestType;
 import com.xlipstudio.cleanthescreen.communication.sub.WrapType;
-import com.xlipstudio.cleanthescreen.objects.Cell;
 
-public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCallback{
+public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCallback {
     private static OpeningScreen instance = new OpeningScreen();
 
 
@@ -21,10 +20,7 @@ public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCal
 
     public OpeningScreen() {
         super();
-        MyInputProcessor processor = new MyInputProcessor(this);
-        processor.setMyInputCallback(this);
-        Gdx.input.setInputProcessor(processor);
-        setClearColor(Color.WHITE);
+
     }
 
     @Override
@@ -32,11 +28,17 @@ public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCal
         super.render(delta);
 
 
-
     }
 
     @Override
     public void initialized() {
+        MyInputProcessor processor = new MyInputProcessor(this);
+        processor.setMyInputCallback(this);
+        Gdx.input.setInputProcessor(processor);
+        setClearColor(Color.WHITE);
+
+        Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PLAY"));
+        CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
 
     }
 
@@ -47,8 +49,7 @@ public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCal
 
     @Override
     public boolean touchUp(Vector2 vector2, Vector2 vector21) {
-        Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PLAY"));
-        CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
+
         return false;
     }
 
@@ -60,8 +61,10 @@ public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCal
     @Override
     public void wrapReceived(Wrap wrap) {
         super.wrapReceived(wrap);
-        if(wrap.getResponse().isResult()) {
-            CleanTheScreenGame.changeScreen(WaitingScreen.getInstance());
+        if (wrap.getResponse().isResult()) {
+
+            CleanTheScreenGame.changeScreen(ScreenHolder.getWaitingScreen());
+
         }
 
     }
