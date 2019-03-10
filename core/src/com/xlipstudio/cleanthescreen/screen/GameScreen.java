@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.xlip.threedtemp.Input.MyInputProcessor;
 import com.xlip.threedtemp.Settings.Settings;
 import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
@@ -17,7 +16,6 @@ import com.xlipstudio.cleanthescreen.game.GameConfig;
 import com.xlipstudio.cleanthescreen.objects.Cell;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class GameScreen extends Screen implements MyInputProcessor.MyInputCallback {
     private static GameScreen instance = new GameScreen();
@@ -25,6 +23,8 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public static GameScreen getInstance() {
         return instance;
     }
+
+    private boolean gameFinished = false;
 
 
     private ShapeRenderer shapeRenderer = new ShapeRenderer();
@@ -82,7 +82,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
                 cell.setY(Settings.orto_height / 2 - j * cellHeight - cellHeight);
                 cells.put(cell.getId(), cell);
-                id ++;
+                id++;
             }
         }
 
@@ -92,15 +92,18 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public void render(float delta) {
 
         super.render(delta);
-        for (Cell cell : cells.values()
-        ) {
-            renderCell(cell);
+        if (!gameFinished) {
+            for (Cell cell : cells.values()
+            ) {
+                renderCell(cell);
 
+            }
         }
+
     }
 
     public void renderCell(Cell cell) {
-        if(!cell.isDestroyed()) {
+        if (!cell.isDestroyed()) {
             shapeRenderer.begin();
             shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.rect(cell.getX(), cell.getY(), cell.getWidth(), cell.getHeight(), Color.RED, Color.RED, Color.RED, Color.RED);
@@ -112,6 +115,10 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     @Override
     public boolean touchDown(Vector2 vector2, Vector2 vector21) {
         checkCells(vector2);
+        if(gameFinished) {
+
+
+        }
         return false;
     }
 
@@ -126,30 +133,34 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         return false;
     }
 
-    void sendRemoveCellReq(Cell cell) {
-
-
-    }
 
     private void checkCells(Vector2 pos) {
-        for (Cell cell : cells.values()) {
-            if (cell.isIn(pos)) {
-                Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.DELETE_CELL, cell.getId()));
+        if(!gameFinished){
+            for (Cell cell : cells.values()) {
+                if (cell.isIn(pos)) {
+                    Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.DELETE_CELL, cell.getId()));
 
-                CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
-                // cells.removeValue(cell, true);
+                    CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
+                    // cells.removeValue(cell, true);
+                }
             }
         }
+
     }
 
     @Override
     public void wrapReceived(Wrap wrap) {
         if (wrap.getResponse().isResult()) {
             Response response = wrap.getResponse();
-            if(response.getCode().equals("100")) {
+            if (response.getCode().equals("100")) {
+
                 setClearColor(Color.BLUE);
-            }else if(response.getCode().equals("-100") ) {
+                gameFinished = true;
+                return;
+            } else if (response.getCode().equals("-100")) {
                 setClearColor(Color.DARK_GRAY);
+                gameFinished = true;
+                return;
             }
 
 

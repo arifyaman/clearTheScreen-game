@@ -18,10 +18,10 @@ public class Client extends Thread implements GameClient {
     private GameClientCallbacks gameClientCallbacks;
 
 
-    public Client(GameClientCallbacks gameClientCallbacks, String clientId) {
+    public Client(GameClientCallbacks gameClientCallbacks, String clientId, String host) {
         this.gameClientCallbacks = gameClientCallbacks;
         try {
-            socket = new Socket("localhost", 36813);
+            socket = new Socket(host, 36813);
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
             this.inputStream = new ObjectInputStream(socket.getInputStream());
             this.clientId = clientId;
@@ -72,8 +72,6 @@ public class Client extends Thread implements GameClient {
         request.setPayload(clientId);
         wrap.setRequest(request);
         dispatchWrap(wrap);
-
-
     }
 
 

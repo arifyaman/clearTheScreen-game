@@ -30,7 +30,7 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     @Override
     public void create() {
         super.create();
-        gameClient.start();
+
         this.onSplashScreenFinished();
 
 

@@ -17,7 +17,8 @@ public class DesktopLauncher {
 
 
 		CleanTheScreenGame game = new CleanTheScreenGame();
-		Client client = new Client(game, "a8ys791238hwdmf");
+		Client client = new Client(game, "a8ys791238hwdmf", "localhost");
+		client.start();
 		CleanTheScreenGame.setGameClient(client);
 
 
