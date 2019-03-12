@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.xlip.threedtemp.Settings.Settings;
 import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
 import com.xlipstudio.cleanthescreen.client.Client;
+import org.lwjgl.Sys;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -15,9 +16,14 @@ public class DesktopLauncher {
 		config.y = Settings.y;
 		config.samples = 3;
 
+		String host = System.getProperty("gamehost");
+
+
 
 		CleanTheScreenGame game = new CleanTheScreenGame();
-		Client client = new Client(game, "a8ys791238hwdmf", "localhost");
+		Client client = new Client(game, "a8ys791238hwdmf", "51.38.126.60");
+		//Client client = new Client(game, "a8ys791238hwdmf", "localhost");
+
 		client.start();
 		CleanTheScreenGame.setGameClient(client);
 

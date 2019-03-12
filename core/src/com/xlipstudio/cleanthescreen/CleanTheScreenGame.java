@@ -76,11 +76,13 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
 
 
     public static void changeScreen(Screen screen) {
-        CleanTheScreenGame.screen = screen;
         screen.initialized();
+        CleanTheScreenGame.screen = screen;
+
     }
 
     public static void changeScreen(Screen screen, Object object) {
+
         CleanTheScreenGame.screen = screen;
         screen.initialized(object);
     }

@@ -34,6 +34,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
     private float widthHeightMul = 0.6f;
     private long cellSize = 0;
+    protected boolean inited = false;
 
 
     private HashMap<Long, Cell> cells = new HashMap<Long, Cell>();
@@ -42,10 +43,6 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
     }
 
-    @Override
-    public void initialized() {
-
-    }
 
     @Override
     public void initialized(Object object) {
@@ -60,6 +57,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         GameConfig config = ((GameConfig) object);
         this.cellSize = config.cellSize;
         this.setClearColor(Color.WHITE);
+        inited = true;
         initCells();
 
     }
@@ -94,7 +92,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public void render(float delta) {
 
         super.render(delta);
-        if (!gameFinished) {
+        if (!gameFinished && inited) {
             for (Cell cell : cells.values()
             ) {
                 renderCell(cell);
@@ -118,7 +116,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public boolean touchDown(Vector2 vector2, Vector2 vector21) {
         checkCells(vector2);
         if(gameFinished) {
-            Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, null));
+            Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PLAY"));
             CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
         }
         return false;
@@ -143,6 +141,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
                     Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.DELETE_CELL, cell.getId()));
 
                     CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
+                    cell.setDestroyed(true);
                     // cells.removeValue(cell, true);
                 }
             }
@@ -154,7 +153,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public void wrapReceived(Wrap wrap) {
         if(gameFinished) {
             if(wrap.getResponse().isResult()) {
-               CleanTheScreenGame.changeScreen(ScreenHolder.getWaitingScreen());
+               CleanTheScreenGame.changeScreen(ScreenHolder.getMainScreen());
                return;
             }
         }
@@ -166,10 +165,12 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
                 setClearColor(Color.BLUE);
                 gameFinished = true;
+                inited = false;
                 return;
             } else if (response.getCode().equals("-100")) {
                 setClearColor(Color.DARK_GRAY);
                 gameFinished = true;
+                inited = false;
                 return;
             }
 

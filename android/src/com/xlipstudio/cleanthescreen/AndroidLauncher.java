@@ -3,6 +3,7 @@ package com.xlipstudio.cleanthescreen;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.provider.Settings;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
@@ -19,6 +20,8 @@ public class AndroidLauncher extends AndroidApplication {
 		config.numSamples = 4;
 
 		final CleanTheScreenGame game = new CleanTheScreenGame();
+
+
 
 
 		try {
@@ -42,7 +45,10 @@ public class AndroidLauncher extends AndroidApplication {
 
 		protected GameClient doInBackground(CleanTheScreenGame... games) {
 			try {
-				final Client client = new Client(games[0], "hzb6781724kdcVz23", "10.0.2.2");
+				String android_id = Settings.Secure.getString(getContext().getContentResolver(),
+						Settings.Secure.ANDROID_ID);
+
+				final Client client = new Client(games[0], android_id, "51.38.126.60");
 				client.start();
 
 
