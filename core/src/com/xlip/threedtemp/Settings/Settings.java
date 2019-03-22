@@ -11,8 +11,8 @@ public class Settings {
     public static int appheight=800;
     public static boolean splashScreenEnabled = false;
 
-    public static float orto_width=800; //calculated after init func
-    public static float orto_height=800;
+    public static float orto_width=800;
+    public static float orto_height=800; //calculated after init func
 
     public static int x = 1000;
     public static int y = 0;

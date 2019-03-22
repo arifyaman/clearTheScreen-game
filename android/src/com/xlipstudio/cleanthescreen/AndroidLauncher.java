@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.provider.Settings;
+import android.widget.Toast;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
@@ -26,7 +27,11 @@ public class AndroidLauncher extends AndroidApplication {
 
 		try {
 			GameClient client = new StartGameClient().execute(game).get();
-			CleanTheScreenGame.setGameClient(client);
+			if(client != null) {
+				CleanTheScreenGame.setGameClient(client);
+
+			}
+
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -34,8 +39,8 @@ public class AndroidLauncher extends AndroidApplication {
 		}
 
 
-
 		initialize(game, config);
+
 	}
 
 
@@ -48,7 +53,7 @@ public class AndroidLauncher extends AndroidApplication {
 				String android_id = Settings.Secure.getString(getContext().getContentResolver(),
 						Settings.Secure.ANDROID_ID);
 
-				final Client client = new Client(games[0], android_id, "51.38.126.60");
+				final Client client = new Client(games[0], android_id, "51.38.126.60" /*"10.0.2.2"*/);
 				client.start();
 
 
@@ -61,6 +66,9 @@ public class AndroidLauncher extends AndroidApplication {
 		}
 
 		protected void onPostExecute(GameClient feed) {
+			if(this.exception != null) {
+				Toast.makeText(AndroidLauncher.this, "Not able to connect :(", Toast.LENGTH_SHORT).show();
+			}
 			// TODO: check this.exception
 			// TODO: do something with the feed
 		}

@@ -16,6 +16,8 @@ public class Assets {
     public static String defaultShaderVertex;
 
     public static Texture splash;
+    public static Texture fontTexture;
+
 
     //endregion
     
@@ -30,6 +32,11 @@ public class Assets {
         barrelBlurFragment = Gdx.files.internal("barrelBlur.glsl").readString();
         testFragment = Gdx.files.internal("testFragment.glsl").readString();
         defaultShaderVertex = Gdx.files.internal("default.vertex.glsl").readString();
+        fontTexture = new Texture(Gdx.files.internal("obelixfnt.png"));
+        fontTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Linear); // linear filtering in nearest mipmap image
+
+
+
     }
 
 

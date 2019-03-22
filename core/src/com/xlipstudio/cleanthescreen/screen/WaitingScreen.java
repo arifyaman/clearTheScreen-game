@@ -41,7 +41,7 @@ public class WaitingScreen extends Screen implements MyInputProcessor.MyInputCal
 
     @Override
     public boolean touchDown(Vector2 vector2, Vector2 vector21) {
-        Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PLAY"));
+        Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.EXIT, null));
         CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
         return false;
     }
@@ -62,8 +62,10 @@ public class WaitingScreen extends Screen implements MyInputProcessor.MyInputCal
         super.wrapReceived(wrap);
         if(wrap.getResponse().isResult()) {
             Object payload = wrap.getResponse().getPayload();
-            if(payload != null) {
+            if(wrap.getResponse().getCode().equals("100")) {
                 CleanTheScreenGame.changeScreen(ScreenHolder.getGameScreen(),this.gson.fromJson(((String) payload), GameConfig.class));
+            }else if(wrap.getResponse().getCode().equals("101")) {
+                CleanTheScreenGame.changeScreen(ScreenHolder.getOpeningScreen());
             }
         }
     }

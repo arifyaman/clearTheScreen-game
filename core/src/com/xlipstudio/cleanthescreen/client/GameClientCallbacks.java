@@ -4,5 +4,5 @@ import com.xlipstudio.cleanthescreen.communication.Wrap;
 
 public interface GameClientCallbacks {
     void wrapReceived(Wrap wrap);
-
+    void unableToConnect();
 }

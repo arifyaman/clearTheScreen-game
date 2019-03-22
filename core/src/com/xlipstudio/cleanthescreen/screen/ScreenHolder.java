@@ -5,12 +5,14 @@ public class ScreenHolder {
     public static OpeningScreen openingScreen;
     public static GameScreen  gameScreen;
     public static MainScreen  mainScreen;
+    public static ProfileScreen  profileScreen;
 
     public static void init() {
         waitingScreen = new WaitingScreen();
         openingScreen = new OpeningScreen();
         gameScreen = new GameScreen();
         mainScreen = new MainScreen();
+        profileScreen = new ProfileScreen();
     }
 
     public static WaitingScreen getWaitingScreen() {
@@ -27,5 +29,9 @@ public class ScreenHolder {
 
     public static MainScreen getMainScreen() {
         return mainScreen;
+    }
+
+    public static ProfileScreen getProfileScreen() {
+        return profileScreen;
     }
 }

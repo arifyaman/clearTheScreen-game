@@ -6,6 +6,7 @@ import com.xlip.threedtemp.ThreeDTemp;
 import com.xlipstudio.cleanthescreen.client.GameClient;
 import com.xlipstudio.cleanthescreen.client.GameClientCallbacks;
 import com.xlipstudio.cleanthescreen.communication.Wrap;
+import com.xlipstudio.cleanthescreen.screen.ProfileScreen;
 import com.xlipstudio.cleanthescreen.screen.Screen;
 import com.xlipstudio.cleanthescreen.screen.ScreenHolder;
 
@@ -32,8 +33,6 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
         super.create();
 
         this.onSplashScreenFinished();
-
-
     }
 
     @Override
@@ -90,6 +89,11 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     @Override
     public void wrapReceived(Wrap wrap) {
         ((Screen) screen).wrapReceived(wrap);
+    }
+
+    @Override
+    public void unableToConnect() {
+
     }
 
     @Override
