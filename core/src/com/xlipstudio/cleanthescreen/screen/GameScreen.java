@@ -53,7 +53,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         processor.setMyInputCallback(this);
         this.gameFinished = false;
         this.cells.clear();
-        Gdx.input.setInputProcessor(processor);
+        //Gdx.input.setInputProcessor(processor);
         GameConfig config = ((GameConfig) object);
         this.cellSize = config.cellSize;
         this.setClearColor(Color.WHITE);

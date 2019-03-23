@@ -34,7 +34,7 @@ public class MainScreen extends Screen implements MyInputProcessor.MyInputCallba
     public void initialized() {
         MyInputProcessor processor = new MyInputProcessor(this);
         processor.setMyInputCallback(this);
-        Gdx.input.setInputProcessor(processor);
+        //Gdx.input.setInputProcessor(processor);
         setClearColor(Color.WHITE);
 
 

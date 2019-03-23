@@ -22,8 +22,9 @@ public class DesktopLauncher {
 
         CleanTheScreenGame game = new CleanTheScreenGame();
         Client client = null;
+        new LwjglApplication(game, config);
         try {
-            client = new Client(game, "a8ys791238hwdmf", "51.38.126.60");
+            client = new Client(game, "a8ys791238hwdmf",  /*"51.38.126.60"*/   "localhost");
             client.start();
             CleanTheScreenGame.setGameClient(client);
         } catch (IOException e) {
@@ -34,7 +35,7 @@ public class DesktopLauncher {
         //Client client = new Client(game, "a8ys791238hwdmf", "localhost");
 
 
-        new LwjglApplication(game, config);
+
 
 
     }

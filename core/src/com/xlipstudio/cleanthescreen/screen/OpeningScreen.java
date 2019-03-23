@@ -11,8 +11,9 @@ import com.xlipstudio.cleanthescreen.communication.request.Request;
 import com.xlipstudio.cleanthescreen.communication.request.RequestType;
 import com.xlipstudio.cleanthescreen.communication.response.Response;
 import com.xlipstudio.cleanthescreen.communication.sub.WrapType;
+import com.xlipstudio.cleanthescreen.menu.OpeningMenu;
 
-public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCallback {
+public class OpeningScreen extends Screen{
     private static OpeningScreen instance = new OpeningScreen();
 
 
@@ -22,7 +23,8 @@ public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCal
 
     public OpeningScreen() {
         super();
-
+        this.myInputProcessor = new MyInputProcessor(this);
+        setMenu(new OpeningMenu());
     }
 
     @Override
@@ -34,24 +36,21 @@ public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCal
 
     @Override
     public void initialized() {
-        MyInputProcessor processor = new MyInputProcessor(this);
-        processor.setMyInputCallback(this);
-        Gdx.input.setInputProcessor(processor);
+        Gdx.input.setInputProcessor(myInputProcessor);
         setClearColor(Color.WHITE);
-
     }
 
-    @Override
+   /* @Override
     public boolean touchDown(Vector2 vector2, Vector2 vector21) {
         System.out.println(Settings.appheight);
         System.out.println(vector21);
-        if(vector21.y >= Settings.appheight / 2){
+        *//*if(vector21.y >= Settings.appheight / 2){
             Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PLAY"));
             CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
         }else {
             Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PROFILE"));
             CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
-        }
+        }*//*
 
         return false;
     }
@@ -65,7 +64,7 @@ public class OpeningScreen extends Screen implements MyInputProcessor.MyInputCal
     @Override
     public boolean touchDragged(Vector2 vector2, Vector2 vector21) {
         return false;
-    }
+    }*/
 
     @Override
     public void wrapReceived(Wrap wrap) {

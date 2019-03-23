@@ -11,8 +11,9 @@ import com.xlipstudio.cleanthescreen.communication.request.Request;
 import com.xlipstudio.cleanthescreen.communication.request.RequestType;
 import com.xlipstudio.cleanthescreen.communication.sub.WrapType;
 import com.xlipstudio.cleanthescreen.game.GameConfig;
+import com.xlipstudio.cleanthescreen.menu.WaitingPlayerMenu;
 
-public class WaitingScreen extends Screen implements MyInputProcessor.MyInputCallback {
+public class WaitingScreen extends Screen {
     private static WaitingScreen instance = new WaitingScreen();
     protected Gson gson;
 
@@ -23,6 +24,8 @@ public class WaitingScreen extends Screen implements MyInputProcessor.MyInputCal
     public WaitingScreen() {
         super();
         gson = new Gson();
+        this.myInputProcessor = new MyInputProcessor(this);
+        setMenu(new WaitingPlayerMenu());
 
     }
 
@@ -33,38 +36,20 @@ public class WaitingScreen extends Screen implements MyInputProcessor.MyInputCal
 
     @Override
     public void initialized() {
-        MyInputProcessor processor = new MyInputProcessor(this);
-        processor.setMyInputCallback(this);
-        Gdx.input.setInputProcessor(processor);
+
+        Gdx.input.setInputProcessor(myInputProcessor);
         setClearColor(Color.YELLOW);
     }
 
-    @Override
-    public boolean touchDown(Vector2 vector2, Vector2 vector21) {
-        Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.EXIT, null));
-        CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(Vector2 vector2, Vector2 vector21) {
-
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(Vector2 vector2, Vector2 vector21) {
-        return false;
-    }
 
     @Override
     public void wrapReceived(final Wrap wrap) {
         super.wrapReceived(wrap);
-        if(wrap.getResponse().isResult()) {
+        if (wrap.getResponse().isResult()) {
             Object payload = wrap.getResponse().getPayload();
-            if(wrap.getResponse().getCode().equals("100")) {
-                CleanTheScreenGame.changeScreen(ScreenHolder.getGameScreen(),this.gson.fromJson(((String) payload), GameConfig.class));
-            }else if(wrap.getResponse().getCode().equals("101")) {
+            if (wrap.getResponse().getCode().equals("100")) {
+                CleanTheScreenGame.changeScreen(ScreenHolder.getGameScreen(), this.gson.fromJson(((String) payload), GameConfig.class));
+            } else if (wrap.getResponse().getCode().equals("101")) {
                 CleanTheScreenGame.changeScreen(ScreenHolder.getOpeningScreen());
             }
         }

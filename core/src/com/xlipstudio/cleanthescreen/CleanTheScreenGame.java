@@ -105,4 +105,8 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     public void resume() {
 
     }
+    public static void test() {
+        System.out.println("asdas");
+    }
+
 }

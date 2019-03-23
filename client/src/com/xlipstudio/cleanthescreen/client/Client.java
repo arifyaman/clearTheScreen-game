@@ -1,5 +1,6 @@
 package com.xlipstudio.cleanthescreen.client;
 
+import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
 import com.xlipstudio.cleanthescreen.communication.Wrap;
 import com.xlipstudio.cleanthescreen.communication.request.Request;
 import com.xlipstudio.cleanthescreen.communication.request.RequestType;

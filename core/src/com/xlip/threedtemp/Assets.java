@@ -17,6 +17,9 @@ public class Assets {
 
     public static Texture splash;
     public static Texture fontTexture;
+    public static TextureRegion button;
+    public static TextureRegion button_clicked;
+    public static TextureRegion transparent;
 
 
     //endregion
@@ -34,7 +37,9 @@ public class Assets {
         defaultShaderVertex = Gdx.files.internal("default.vertex.glsl").readString();
         fontTexture = new Texture(Gdx.files.internal("obelixfnt.png"));
         fontTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Linear); // linear filtering in nearest mipmap image
-
+        button = new TextureRegion(new Texture(Gdx.files.internal("button.png")), 1, 1);
+        button_clicked = new TextureRegion(new Texture(Gdx.files.internal("button_c.png")), 1, 1);
+        transparent = new TextureRegion(new Texture(Gdx.files.internal("trnsprnt.png")), 1, 1);
 
 
     }

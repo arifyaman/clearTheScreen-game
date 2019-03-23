@@ -28,7 +28,7 @@ public class Screen implements Menu.ScreenCallbacks,World.ScreenCallbacks {
     private FrameBuffer frameBuffer;
     public SpriteBatch spriteBatch;
     public OrthographicCamera orthographicCamera;
-    private MyInputProcessor myInputProcessor;
+    protected MyInputProcessor myInputProcessor;
     private Color clearColor;
 
     /**
@@ -45,7 +45,7 @@ public class Screen implements Menu.ScreenCallbacks,World.ScreenCallbacks {
         spriteBatch.enableBlending();
         this.myInputProcessor = new MyInputProcessor(this);
         this.iTime = 0;
-        Gdx.input.setInputProcessor(myInputProcessor);
+        //Gdx.input.setInputProcessor(myInputProcessor);
         this.clearColor = new Color(1,1,1,1);
     }
 

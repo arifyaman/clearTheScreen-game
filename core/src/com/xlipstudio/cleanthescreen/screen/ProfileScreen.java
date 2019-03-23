@@ -15,10 +15,12 @@ import com.xlipstudio.cleanthescreen.communication.request.Request;
 import com.xlipstudio.cleanthescreen.communication.request.RequestType;
 import com.xlipstudio.cleanthescreen.communication.response.Response;
 import com.xlipstudio.cleanthescreen.communication.sub.WrapType;
+import com.xlipstudio.cleanthescreen.menu.OpeningMenu;
+import com.xlipstudio.cleanthescreen.menu.ProfileMenu;
 
 import java.util.HashMap;
 
-public class ProfileScreen extends Screen implements MyInputProcessor.MyInputCallback {
+public class ProfileScreen extends Screen{
     private static ProfileScreen instance = new ProfileScreen();
     private BitmapFont font;
     private HashMap<String, String> profileDetails;
@@ -28,6 +30,10 @@ public class ProfileScreen extends Screen implements MyInputProcessor.MyInputCal
         font = new BitmapFont(Gdx.files.internal("obelixfnt.fnt"), new TextureRegion(Assets.fontTexture), false);
         font.setColor(Color.BLACK);
         spriteBatch.setProjectionMatrix(orthographicCamera.combined);
+
+
+        this.myInputProcessor = new MyInputProcessor(this);
+        setMenu(new ProfileMenu());
 
     }
 
@@ -51,28 +57,9 @@ public class ProfileScreen extends Screen implements MyInputProcessor.MyInputCal
 
     @Override
     public void initialized() {
-        MyInputProcessor processor = new MyInputProcessor(this);
-        processor.setMyInputCallback(this);
-        Gdx.input.setInputProcessor(processor);
 
-    }
-
-    @Override
-    public boolean touchDown(Vector2 vector2, Vector2 vector21) {
-        Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.EXIT,null));
-        CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(Vector2 vector2, Vector2 vector21) {
-
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(Vector2 vector2, Vector2 vector21) {
-        return false;
+        Gdx.input.setInputProcessor(myInputProcessor);
+        setClearColor(Color.WHITE);
     }
 
     @Override

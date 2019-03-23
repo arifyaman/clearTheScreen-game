@@ -1,6 +1,7 @@
 package com.xlip.threedtemp.Menu.Object;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -18,7 +19,11 @@ public class MenuObject extends Clickable {
     private boolean finisher;
     private Color color;
     private Color temp;
+    private BitmapFont bitmapFont;
 
+    private String title;
+    private float titleMarginTop;
+    private float titleMarginLeft;
 
 
     private MenuObjectCallBacks menuObjectCallBacks;
@@ -34,45 +39,49 @@ public class MenuObject extends Clickable {
 
     @Override
     public void clicked() {
-        if(finisher)
+        if (finisher)
             menuObjectCallBacks.finish();
 
-        if(onClickListener != null)
-        onClickListener.onClick();
+        if (onClickListener != null)
+            onClickListener.onClick();
 
     }
 
-    public void update(float delta){
+    public void update(float delta) {
 
     }
 
 
-    public void draw(SpriteBatch batch, float delta){
-        if(color != null) {
+    public void draw(SpriteBatch batch, float delta) {
+        if (color != null) {
             temp = batch.getColor();
             batch.setColor(color);
         }
         TextureRegion t = getEnabledTexture();
 
-        if(isDisabled()) {
+        if (isDisabled()) {
             t = getDisabledTexture();
-        }else {
-            if(isOnIt()) {
+        } else {
+            if (isOnIt()) {
                 t = getClickedTexture();
             }
         }
-        if(t == null)t = getEnabledTexture();
-        batch.draw(t,getPosition().x,getPosition().y,getWh().getWidth(),getWh().getHeight());
+        if (t == null) t = getEnabledTexture();
+        batch.draw(t, getPosition().x, getPosition().y, getWh().getWidth(), getWh().getHeight());
 
+        if (title != null) bitmapFont.draw(batch, title, getPosition().x + titleMarginLeft, getPosition().y + getWh().getHeight() + titleMarginTop);
         update(delta);
 
-        if(color != null) {
+        if (color != null) {
             batch.setColor(temp);
         }
     }
 
-
-
+    public void setTitle(String title, float titleMarginTop, float titleMarginLeft) {
+        this.title = title;
+        this.titleMarginLeft = titleMarginLeft;
+        this.titleMarginTop = titleMarginTop;
+    }
 
 
     //GETTER SETTER
@@ -143,5 +152,9 @@ public class MenuObject extends Clickable {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setBitmapFont(BitmapFont bitmapFont) {
+        this.bitmapFont = bitmapFont;
     }
 }
