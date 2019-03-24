@@ -53,13 +53,13 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         processor.setMyInputCallback(this);
         this.gameFinished = false;
         this.cells.clear();
-        //Gdx.input.setInputProcessor(processor);
+        Gdx.input.setInputProcessor(processor);
         GameConfig config = ((GameConfig) object);
         this.cellSize = config.cellSize;
         this.setClearColor(Color.WHITE);
-        inited = true;
-        initCells();
 
+        initCells();
+        inited = true;
     }
 
     private void initCells() {
@@ -116,7 +116,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public boolean touchDown(Vector2 vector2, Vector2 vector21) {
         checkCells(vector2);
         if(gameFinished) {
-            Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PLAY"));
+            Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.EXIT, "BACK"));
             CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
         }
         return false;
@@ -153,7 +153,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public void wrapReceived(Wrap wrap) {
         if(gameFinished) {
             if(wrap.getResponse().isResult()) {
-               CleanTheScreenGame.changeScreen(ScreenHolder.getMainScreen());
+               CleanTheScreenGame.changeScreen(ScreenHolder.getOpeningScreen());
                return;
             }
         }

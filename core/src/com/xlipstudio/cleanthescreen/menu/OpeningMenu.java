@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.xlip.threedtemp.Assets;
 import com.xlip.threedtemp.Input.Abs.Clickable;
-import com.xlip.threedtemp.Menu.Menu;
 import com.xlip.threedtemp.Menu.Object.MenuObject;
 import com.xlip.threedtemp.Settings.Settings;
 import com.xlip.threedtemp.Utils.MenuUtils.ObjectPlacer;
@@ -33,6 +32,7 @@ public class OpeningMenu extends Menu {
             public void onClick() {
                 Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PROFILE"));
                 CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
+                setLoading(true);
             }
         });
 
@@ -46,6 +46,7 @@ public class OpeningMenu extends Menu {
             public void onClick() {
                 Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.GO, "PLAY"));
                 CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
+                setLoading(true);
             }
         });
 

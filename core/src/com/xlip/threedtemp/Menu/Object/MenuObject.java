@@ -21,7 +21,7 @@ public class MenuObject extends Clickable {
     private Color temp;
     private BitmapFont bitmapFont;
 
-    private String title;
+    protected String title;
     private float titleMarginTop;
     private float titleMarginLeft;
 

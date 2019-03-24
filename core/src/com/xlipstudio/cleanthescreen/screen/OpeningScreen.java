@@ -2,18 +2,13 @@ package com.xlipstudio.cleanthescreen.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.xlip.threedtemp.Input.MyInputProcessor;
-import com.xlip.threedtemp.Settings.Settings;
 import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
 import com.xlipstudio.cleanthescreen.communication.Wrap;
-import com.xlipstudio.cleanthescreen.communication.request.Request;
-import com.xlipstudio.cleanthescreen.communication.request.RequestType;
 import com.xlipstudio.cleanthescreen.communication.response.Response;
-import com.xlipstudio.cleanthescreen.communication.sub.WrapType;
 import com.xlipstudio.cleanthescreen.menu.OpeningMenu;
 
-public class OpeningScreen extends Screen{
+public class OpeningScreen extends Screen {
     private static OpeningScreen instance = new OpeningScreen();
 
 
@@ -21,10 +16,13 @@ public class OpeningScreen extends Screen{
         return instance;
     }
 
+    private OpeningMenu menu;
+
     public OpeningScreen() {
         super();
         this.myInputProcessor = new MyInputProcessor(this);
-        setMenu(new OpeningMenu());
+        menu = new OpeningMenu();
+        setMenu(menu);
     }
 
     @Override
@@ -71,10 +69,12 @@ public class OpeningScreen extends Screen{
         super.wrapReceived(wrap);
         if (wrap.getResponse().isResult()) {
             Response response = wrap.getResponse();
-            if(response.getCode().equals("101")) {
+            if (response.getCode().equals("101")) {
                 CleanTheScreenGame.changeScreen(ScreenHolder.getWaitingScreen());
-            }else if(response.getCode().equals("102")) {
+                finishLoading();
+            } else if (response.getCode().equals("102")) {
                 CleanTheScreenGame.changeScreen(ScreenHolder.getProfileScreen());
+                finishLoading();
             }
         }
 

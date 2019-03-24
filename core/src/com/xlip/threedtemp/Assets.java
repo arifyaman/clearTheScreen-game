@@ -20,6 +20,8 @@ public class Assets {
     public static TextureRegion button;
     public static TextureRegion button_clicked;
     public static TextureRegion transparent;
+    public static TextureRegion loading;
+
 
 
     //endregion
@@ -40,6 +42,7 @@ public class Assets {
         button = new TextureRegion(new Texture(Gdx.files.internal("button.png")), 1, 1);
         button_clicked = new TextureRegion(new Texture(Gdx.files.internal("button_c.png")), 1, 1);
         transparent = new TextureRegion(new Texture(Gdx.files.internal("trnsprnt.png")), 1, 1);
+        loading = new TextureRegion(new Texture(Gdx.files.internal("loading.png")), 480, 800);
 
 
     }
