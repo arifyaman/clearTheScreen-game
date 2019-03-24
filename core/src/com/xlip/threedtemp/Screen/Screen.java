@@ -43,6 +43,7 @@ public class Screen implements Menu.ScreenCallbacks,World.ScreenCallbacks {
 
         spriteBatch = new SpriteBatch();
         spriteBatch.enableBlending();
+        spriteBatch.setProjectionMatrix(orthographicCamera.combined);
         this.myInputProcessor = new MyInputProcessor(this);
         this.iTime = 0;
         //Gdx.input.setInputProcessor(myInputProcessor);

@@ -38,7 +38,7 @@ public class WaitingPlayerMenu extends Menu {
 
         MenuObject information = new MenuObject(Assets.transparent, new Vector2(0, 0), new Vector2(Settings.orto_width, Settings.orto_height / 2));
         information.setBitmapFont(font);
-        information.setTitle("Please wait for \n other player", -360, -220);
+        information.setTitle("Please wait\n\nFinding\nplayer...", -360, -120);
         information.setDisabled(true);
 
 
@@ -47,6 +47,7 @@ public class WaitingPlayerMenu extends Menu {
         addMenuObject(information);
 
     }
+
 
 
 }

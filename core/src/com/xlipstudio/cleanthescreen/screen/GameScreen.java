@@ -74,13 +74,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         for (int i = 0; i < cellsForWidth; i++) {
 
             for (int j = 0; j < cellsForHeight; j++) {
-                Cell cell = new Cell(id);
-                cell.setWidth(cellWidth);
-                cell.setHeight(cellHeight);
-
-                cell.setX(i * cellWidth - Settings.orto_width / 2);
-
-                cell.setY(Settings.orto_height / 2 - j * cellHeight - cellHeight);
+                Cell cell = new Cell(id, i * cellWidth - Settings.orto_width / 2, Settings.orto_height / 2 - j * cellHeight - cellHeight, cellWidth, cellHeight);
                 cells.put(cell.getId(), cell);
                 id++;
             }
@@ -95,8 +89,10 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         if (!gameFinished && inited) {
             for (Cell cell : cells.values()
             ) {
-                renderCell(cell);
+                Cell cell2 = new Cell(0, 0 , 0, cellWidth, cellHeight);
 
+                //renderCell(cell);
+                cell.render(delta,spriteBatch);
             }
         }
 
