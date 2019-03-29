@@ -1,6 +1,5 @@
 package com.xlipstudio.cleanthescreen.screen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.xlip.threedtemp.Input.MyInputProcessor;
@@ -63,7 +62,7 @@ public class MainScreen extends Screen implements MyInputProcessor.MyInputCallba
         super.wrapReceived(wrap);
         if (wrap.getResponse().isResult()) {
 
-            CleanTheScreenGame.changeScreen(ScreenHolder.getWaitingScreen());
+            CleanTheScreenGame.changeScreen(new WaitingScreen());
 
         }
 

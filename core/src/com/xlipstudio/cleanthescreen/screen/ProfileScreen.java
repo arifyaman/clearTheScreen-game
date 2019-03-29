@@ -65,7 +65,7 @@ public class ProfileScreen extends Screen {
             System.out.println(this.profileDetails);
             finishLoading();
         } else if (response.getCode().equals("1")) {
-            CleanTheScreenGame.changeScreen(ScreenHolder.getOpeningScreen());
+            CleanTheScreenGame.changeScreen(new OpeningScreen());
             finishLoading();
         }
 

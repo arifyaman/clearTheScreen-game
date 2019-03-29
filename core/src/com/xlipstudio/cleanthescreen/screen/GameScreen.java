@@ -149,7 +149,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     public void wrapReceived(Wrap wrap) {
         if(gameFinished) {
             if(wrap.getResponse().isResult()) {
-               CleanTheScreenGame.changeScreen(ScreenHolder.getOpeningScreen());
+               CleanTheScreenGame.changeScreen(new OpeningScreen());
                return;
             }
         }

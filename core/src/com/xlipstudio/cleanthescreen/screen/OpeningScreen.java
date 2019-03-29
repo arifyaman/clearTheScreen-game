@@ -70,10 +70,10 @@ public class OpeningScreen extends Screen {
         if (wrap.getResponse().isResult()) {
             Response response = wrap.getResponse();
             if (response.getCode().equals("101")) {
-                CleanTheScreenGame.changeScreen(ScreenHolder.getWaitingScreen());
+                CleanTheScreenGame.changeScreen(new WaitingScreen());
                 finishLoading();
             } else if (response.getCode().equals("102")) {
-                CleanTheScreenGame.changeScreen(ScreenHolder.getProfileScreen());
+                CleanTheScreenGame.changeScreen(new ProfileScreen());
                 finishLoading();
             }
         }

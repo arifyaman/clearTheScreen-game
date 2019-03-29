@@ -58,10 +58,10 @@ public class WaitingScreen extends Screen {
         if (wrap.getResponse().isResult()) {
             Object payload = wrap.getResponse().getPayload();
             if (wrap.getResponse().getCode().equals("100")) {
-                CleanTheScreenGame.changeScreen(ScreenHolder.getGameScreen(), this.gson.fromJson(((String) payload), GameConfig.class));
+                CleanTheScreenGame.changeScreen(new GameScreen(), this.gson.fromJson(((String) payload), GameConfig.class));
                 finishLoading();
             } else if (wrap.getResponse().getCode().equals("101")) {
-                CleanTheScreenGame.changeScreen(ScreenHolder.getOpeningScreen());
+                CleanTheScreenGame.changeScreen(new OpeningScreen());
                 finishLoading();
             }
         }

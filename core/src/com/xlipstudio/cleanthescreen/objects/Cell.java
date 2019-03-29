@@ -28,21 +28,18 @@ public class Cell {
         this.y = y;
         this.color = Color.RED;
         this.texture = Assets.cell;
-        this.xDestroyer = new Lerp(0, width, 8);
-        this.yDestroyer = new Lerp(0, height, 8);
+        this.xDestroyer = new Lerp(0, width, 20);
+        this.yDestroyer = new Lerp(0, height, 20);
     }
 
 
     public void render(float delta, SpriteBatch batch) {
         Color color = batch.getColor();
-        batch.setColor(this.color);
+       batch.setColor(this.color);
         batch.begin();
 
         float consumeX = destroyed ? xDestroyer.getValue(delta) : 0;
         float consumeY = destroyed ? yDestroyer.getValue(delta) : 0;
-        if(destroyed){
-            System.out.println(consumeY + "  asd");
-        }
 
         batch.draw(texture, x + consumeX/2  , y + consumeY/2  , width - consumeX, height - consumeY);
         batch.end();

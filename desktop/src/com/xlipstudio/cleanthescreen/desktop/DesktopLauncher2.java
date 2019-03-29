@@ -1,5 +1,7 @@
 package com.xlipstudio.cleanthescreen.desktop;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.xlip.threedtemp.Settings.Settings;
@@ -17,24 +19,29 @@ public class DesktopLauncher2 {
         config.y = Settings.y;
         config.samples = 3;
 
+        final CleanTheScreenGame game = new CleanTheScreenGame();
+        new LwjglApplication(game, config);
 
-        String host = System.getProperty("gamehost");
+            Gdx.app.postRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Client client = new Client(game, "v8ys791238hwdmf", "localhost");
+                        client.start();
+                        CleanTheScreenGame.setGameClient(client);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-        CleanTheScreenGame game = new CleanTheScreenGame();
-        Client client = null;
-        try {
-            client = new Client(game, "v8ys791238hwdmf", "localhost");
-            client.start();
-            CleanTheScreenGame.setGameClient(client);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Not able to connect");
-            return;
-        }
+
+                }
+            });
+
+
         //Client client = new Client(game, "a8ys791238hwdmf", "localhost");
 
 
-        new LwjglApplication(game, config);
+
 
     }
 }

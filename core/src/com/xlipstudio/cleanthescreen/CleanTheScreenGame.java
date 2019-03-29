@@ -1,14 +1,14 @@
 package com.xlipstudio.cleanthescreen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.xlip.threedtemp.Interfaces.AndroidUnit;
 import com.xlip.threedtemp.ThreeDTemp;
 import com.xlipstudio.cleanthescreen.client.GameClient;
 import com.xlipstudio.cleanthescreen.client.GameClientCallbacks;
 import com.xlipstudio.cleanthescreen.communication.Wrap;
-import com.xlipstudio.cleanthescreen.screen.ProfileScreen;
+import com.xlipstudio.cleanthescreen.screen.OpeningScreen;
 import com.xlipstudio.cleanthescreen.screen.Screen;
-import com.xlipstudio.cleanthescreen.screen.ScreenHolder;
 
 public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallbacks {
     static GameClient gameClient;
@@ -16,8 +16,6 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     public static void setGameClient(GameClient gameClient) {
         CleanTheScreenGame.gameClient = gameClient;
     }
-
-    public static ScreenHolder screenHolder;
 
     public CleanTheScreenGame(AndroidUnit androidUnit) {
         super(androidUnit);
@@ -39,7 +37,7 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     public void onSplashScreenFinished() {
         super.onSplashScreenFinished();
         gameClient.register();
-        changeScreen(ScreenHolder.getOpeningScreen());
+        changeScreen(new OpeningScreen());
     }
 
 
@@ -61,7 +59,7 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
 
     @Override
     public void doInSplashScreenBackground() {
-        ScreenHolder.init();
+
     }
 
     @Override
@@ -87,8 +85,14 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     }
 
     @Override
-    public void wrapReceived(Wrap wrap) {
-        ((Screen) screen).wrapReceived(wrap);
+    public void wrapReceived(final Wrap wrap) {
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                ((Screen) screen).wrapReceived(wrap);
+
+            }
+        });
     }
 
     @Override
@@ -105,6 +109,7 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     public void resume() {
 
     }
+
     public static void test() {
         System.out.println("asdas");
     }
