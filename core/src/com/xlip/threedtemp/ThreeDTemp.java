@@ -92,6 +92,11 @@ public abstract class ThreeDTemp extends ApplicationAdapter implements SplashScr
                     public void hideBottomBanner() {
 
                     }
+
+                    @Override
+                    public void showTopBanner() {
+
+                    }
                 };
             }
 
@@ -176,7 +181,4 @@ public abstract class ThreeDTemp extends ApplicationAdapter implements SplashScr
         this.paused = false;
     }
 
-    public AndroidUnit getThempAndroidUnit() {
-        return androidUnit;
-    }
 }

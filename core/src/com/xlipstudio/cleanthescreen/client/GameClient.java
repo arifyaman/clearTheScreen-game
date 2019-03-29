@@ -7,5 +7,6 @@ public interface GameClient {
      void dispatchWrap(Wrap wrap);
      void register();
      void start();
+     boolean isConnected();
 
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="top_banner_id" type="id"/>
+    <item name="bottom_banner_id" type="id"/>
+    <item name="game_view_id" type="id"/>
+</resources>

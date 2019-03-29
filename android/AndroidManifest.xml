@@ -3,7 +3,7 @@
     package="com.xlipstudio.cleanthescreen" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -11,6 +11,10 @@
         android:appCategory="game"
         android:label="@string/app_name"
         android:theme="@style/GdxTheme" >
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="@string/admob_app_id"/>
+
         <activity
             android:name="com.xlipstudio.cleanthescreen.AndroidLauncher"
             android:label="@string/app_name" 

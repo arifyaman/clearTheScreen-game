@@ -23,6 +23,9 @@ public class OpeningScreen extends Screen {
         this.myInputProcessor = new MyInputProcessor(this);
         menu = new OpeningMenu();
         setMenu(menu);
+        CleanTheScreenGame.getAndroidUnit().getAdUnit().showBottomBanner();
+        CleanTheScreenGame.getAndroidUnit().getAdUnit().showTopBanner();
+
     }
 
     @Override

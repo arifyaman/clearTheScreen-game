@@ -30,6 +30,7 @@ public interface AndroidUnit {
 
     interface AdUnit {
         void showBottomBanner();
+        void showTopBanner();
         void showInterstitial();
         void hideBottomBanner();
     }

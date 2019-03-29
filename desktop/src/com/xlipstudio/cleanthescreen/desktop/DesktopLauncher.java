@@ -6,8 +6,6 @@ import com.xlip.threedtemp.Settings.Settings;
 import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
 import com.xlipstudio.cleanthescreen.client.Client;
 
-import java.io.IOException;
-
 public class DesktopLauncher {
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -23,19 +21,12 @@ public class DesktopLauncher {
         CleanTheScreenGame game = new CleanTheScreenGame();
         Client client = null;
         new LwjglApplication(game, config);
-        try {
-            client = new Client(game, "a8ys791238hwdmf",  /*"51.38.126.60"*/   "localhost");
-            client.start();
-            CleanTheScreenGame.setGameClient(client);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Not able to connect");
-            return;
-        }
+
+        client = new Client(game, "a8ys791238hwdmf",  /*"51.38.126.60"*/   "localhost");
+        client.start();
+        CleanTheScreenGame.setGameClient(client);
+
         //Client client = new Client(game, "a8ys791238hwdmf", "localhost");
-
-
-
 
 
     }

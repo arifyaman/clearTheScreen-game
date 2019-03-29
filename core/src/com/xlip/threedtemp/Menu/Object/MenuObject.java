@@ -20,6 +20,7 @@ public class MenuObject extends Clickable {
     private Color color;
     private Color temp;
     private BitmapFont bitmapFont;
+    private Color titleColor;
 
     protected String title;
     private float titleMarginTop;
@@ -69,7 +70,18 @@ public class MenuObject extends Clickable {
         if (t == null) t = getEnabledTexture();
         batch.draw(t, getPosition().x, getPosition().y, getWh().getWidth(), getWh().getHeight());
 
-        if (title != null) bitmapFont.draw(batch, title, getPosition().x + titleMarginLeft, getPosition().y + getWh().getHeight() + titleMarginTop);
+        if (title != null){
+            Color previous = null;
+            if(getTitleColor() != null){
+                previous = bitmapFont.getColor();
+                bitmapFont.setColor(getTitleColor());
+            }
+            bitmapFont.draw(batch, title, getPosition().x + titleMarginLeft, getPosition().y + getWh().getHeight() + titleMarginTop);
+            if(getTitleColor() != null){
+                bitmapFont.setColor(previous);
+            }
+
+        }
         update(delta);
 
         if (color != null) {
@@ -156,5 +168,13 @@ public class MenuObject extends Clickable {
 
     public void setBitmapFont(BitmapFont bitmapFont) {
         this.bitmapFont = bitmapFont;
+    }
+
+    public Color getTitleColor() {
+        return titleColor;
+    }
+
+    public void setTitleColor(Color titleColor) {
+        this.titleColor = titleColor;
     }
 }

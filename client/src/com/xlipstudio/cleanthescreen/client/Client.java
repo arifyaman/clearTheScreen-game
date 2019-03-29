@@ -17,22 +17,28 @@ public class Client extends Thread implements GameClient {
     private ObjectInputStream inputStream;
     private String clientId = "";
     private GameClientCallbacks gameClientCallbacks;
+    private boolean connected;
 
 
-    public Client(GameClientCallbacks gameClientCallbacks, String clientId, String host) throws IOException {
+    public Client(GameClientCallbacks gameClientCallbacks, String clientId, String host) {
         this.gameClientCallbacks = gameClientCallbacks;
 
+        try {
             socket = new Socket(host, 36813);
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
             this.inputStream = new ObjectInputStream(socket.getInputStream());
             this.clientId = clientId;
-
+            this.connected = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            this.connected = false;
+        }
 
 
     }
 
     private void read() {
-        while (true) {
+        while (isConnected()) {
             try {
                 Wrap wrap = ((Wrap) inputStream.readObject());
                 Client.this.processWrap(wrap);
@@ -43,6 +49,7 @@ public class Client extends Thread implements GameClient {
                     break;
                 } catch (IOException x) {
                     x.printStackTrace();
+                    break;
                 }
             } catch (Exception e2) {
                 e2.printStackTrace();
@@ -82,5 +89,8 @@ public class Client extends Thread implements GameClient {
         }
     }
 
-
+    @Override
+    public boolean isConnected() {
+        return connected;
+    }
 }

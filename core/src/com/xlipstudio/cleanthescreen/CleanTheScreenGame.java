@@ -7,11 +7,14 @@ import com.xlip.threedtemp.ThreeDTemp;
 import com.xlipstudio.cleanthescreen.client.GameClient;
 import com.xlipstudio.cleanthescreen.client.GameClientCallbacks;
 import com.xlipstudio.cleanthescreen.communication.Wrap;
+import com.xlipstudio.cleanthescreen.menu.NotConnectedMenu;
 import com.xlipstudio.cleanthescreen.screen.OpeningScreen;
 import com.xlipstudio.cleanthescreen.screen.Screen;
 
 public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallbacks {
     static GameClient gameClient;
+    static AndroidUnit androidUnit;
+
 
     public static void setGameClient(GameClient gameClient) {
         CleanTheScreenGame.gameClient = gameClient;
@@ -36,8 +39,15 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
     @Override
     public void onSplashScreenFinished() {
         super.onSplashScreenFinished();
-        gameClient.register();
-        changeScreen(new OpeningScreen());
+        OpeningScreen openingScreen = new OpeningScreen();
+        if(!gameClient.isConnected()) {
+            openingScreen.setMenu(new NotConnectedMenu());
+            changeScreen(openingScreen);
+        }else {
+            gameClient.register();
+            changeScreen(openingScreen);
+        }
+
     }
 
 
@@ -51,11 +61,6 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
         super.dispose();
     }
 
-
-    @Override
-    public AndroidUnit getThempAndroidUnit() {
-        return super.getThempAndroidUnit();
-    }
 
     @Override
     public void doInSplashScreenBackground() {
@@ -110,8 +115,20 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
 
     }
 
+    public static void exit(){
+        Gdx.app.exit();
+    }
+
     public static void test() {
         System.out.println("asdas");
     }
 
+
+    public static AndroidUnit getAndroidUnit() {
+        return androidUnit;
+    }
+
+    public static void setAndroidUnit(AndroidUnit androidUnit) {
+        CleanTheScreenGame.androidUnit = androidUnit;
+    }
 }
