@@ -13,12 +13,12 @@ import com.xlipstudio.cleanthescreen.menu.ProfileMenu;
 
 import java.util.HashMap;
 
-public class ProfileScreen extends Screen {
-    private static ProfileScreen instance = new ProfileScreen();
+public class GameOverScreen extends Screen {
+    private static GameOverScreen instance = new GameOverScreen();
     private BitmapFont font;
-    private HashMap<String, String> profileDetails;
+    private HashMap<String, String> result;
 
-    public ProfileScreen() {
+    public GameOverScreen() {
         super();
         font = new BitmapFont(Gdx.files.internal("obelixfnt.fnt"), new TextureRegion(Assets.fontTexture), false);
         font.setColor(Color.BLACK);
@@ -34,12 +34,20 @@ public class ProfileScreen extends Screen {
     public void render(float delta) {
         super.render(delta);
         spriteBatch.begin();
-        if (profileDetails != null) {
+        if (result != null) {
             int i = 1;
+            for (String key : result.keySet()) {
+                if(key.equals("result")) {
+                    font.setColor(Assets.primaryColor);
+                    font.getData().setScale(2);
+                    font.draw(spriteBatch, result.get(key), -165, 400);
+                    font.setColor(Color.BLACK);
+                } else {
+                    font.getData().setScale(1);
+                    font.draw(spriteBatch, key, -300, 300 - (i * 100));
+                    font.draw(spriteBatch, result.get(key), 100, 300 - (i * 100));
+                }
 
-            for (String key : profileDetails.keySet()) {
-                font.draw(spriteBatch, key, -300, 300 - (i * 100));
-                font.draw(spriteBatch, profileDetails.get(key), 100, 300 - (i * 100));
                 i++;
             }
 
@@ -59,17 +67,18 @@ public class ProfileScreen extends Screen {
     @Override
     public void wrapReceived(Wrap wrap) {
         super.wrapReceived(wrap);
-        Response response = wrap.getResponse();
-        System.out.println(response.getCode());
-        if (response.getCode().equals("10")) {
-            this.profileDetails = ((HashMap) response.getPayload());
-            System.out.println(this.profileDetails);
-            finishLoading();
-        } else if (response.getCode().equals("1")) {
+        if(wrap.getResponse().isResult()) {
             CleanTheScreenGame.changeScreen(new OpeningScreen());
-            finishLoading();
+            return;
         }
 
     }
 
+    public HashMap<String, String> getResult() {
+        return result;
+    }
+
+    public void setResult(HashMap<String, String> result) {
+        this.result = result;
+    }
 }

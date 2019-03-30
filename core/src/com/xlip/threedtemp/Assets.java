@@ -1,6 +1,7 @@
 package com.xlip.threedtemp;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -22,6 +23,9 @@ public class Assets {
     public static TextureRegion button_clicked;
     public static TextureRegion transparent;
     public static TextureRegion loading;
+    public static Color primaryColor;
+    public static Color secondaryColor;
+
 
 
 
@@ -46,7 +50,8 @@ public class Assets {
         button_clicked = new TextureRegion(new Texture(Gdx.files.internal("button_c.png")), 1, 1);
         transparent = new TextureRegion(new Texture(Gdx.files.internal("trnsprnt.png")), 1, 1);
         loading = new TextureRegion(new Texture(Gdx.files.internal("loading.png")), 480, 800);
-
+        primaryColor = Color.valueOf("cd0b45");
+        secondaryColor = Color.valueOf("0a75a3");
 
     }
 

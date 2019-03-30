@@ -98,23 +98,10 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
     }
 
-    public void renderCell(Cell cell) {
-        if (!cell.isDestroyed()) {
-            shapeRenderer.begin();
-            shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-            shapeRenderer.rect(cell.getX(), cell.getY(), cell.getWidth(), cell.getHeight(), Color.RED, Color.RED, Color.RED, Color.RED);
-            shapeRenderer.end();
-        }
-
-    }
 
     @Override
     public boolean touchDown(Vector2 vector2, Vector2 vector21) {
         checkCells(vector2);
-        if(gameFinished) {
-            Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.EXIT, "BACK"));
-            CleanTheScreenGame.getGameClient().dispatchWrap(wrap);
-        }
         return false;
     }
 
@@ -147,24 +134,17 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
     @Override
     public void wrapReceived(Wrap wrap) {
-        if(gameFinished) {
-            if(wrap.getResponse().isResult()) {
-               CleanTheScreenGame.changeScreen(new OpeningScreen());
-               return;
-            }
-        }
-
 
         if (wrap.getResponse().isResult()) {
             Response response = wrap.getResponse();
             if (response.getCode().equals("100")) {
+                goToGameOverScreen(wrap);
 
-                setClearColor(Color.BLUE);
                 gameFinished = true;
                 inited = false;
                 return;
             } else if (response.getCode().equals("-100")) {
-                setClearColor(Color.DARK_GRAY);
+                goToGameOverScreen(wrap);
                 gameFinished = true;
                 inited = false;
                 return;
@@ -177,6 +157,14 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
             }
         }
+
+    }
+
+    private void goToGameOverScreen(Wrap wrap) {
+        GameOverScreen screen = new GameOverScreen();
+        screen.setResult(((HashMap) wrap.getResponse().getPayload()));
+        CleanTheScreenGame.changeScreen(screen);
+        CleanTheScreenGame.getAndroidUnit().getAdUnit().showInterstitial();
 
     }
 

@@ -181,4 +181,7 @@ public abstract class ThreeDTemp extends ApplicationAdapter implements SplashScr
         this.paused = false;
     }
 
+    public AndroidUnit getInnerAndroidUnit() {
+        return androidUnit;
+    }
 }

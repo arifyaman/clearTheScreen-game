@@ -27,6 +27,7 @@ public class CleanTheScreenGame extends ThreeDTemp implements GameClientCallback
 
     public CleanTheScreenGame() {
         super();
+
     }
 
     @Override

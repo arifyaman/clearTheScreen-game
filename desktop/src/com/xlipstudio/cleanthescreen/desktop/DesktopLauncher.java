@@ -25,7 +25,7 @@ public class DesktopLauncher {
         client = new Client(game, "a8ys791238hwdmf",  /*"51.38.126.60"*/   "localhost");
         client.start();
         CleanTheScreenGame.setGameClient(client);
-
+        CleanTheScreenGame.setAndroidUnit(game.getInnerAndroidUnit());
         //Client client = new Client(game, "a8ys791238hwdmf", "localhost");
 
 

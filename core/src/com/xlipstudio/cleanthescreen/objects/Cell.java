@@ -26,7 +26,7 @@ public class Cell {
         this.height = height;
         this.x = x;
         this.y = y;
-        this.color = Color.RED;
+        this.color = Assets.primaryColor;
         this.texture = Assets.cell;
         this.xDestroyer = new Lerp(0, width, 20);
         this.yDestroyer = new Lerp(0, height, 20);

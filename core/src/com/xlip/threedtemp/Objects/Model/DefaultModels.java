@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.shapebuilders.ConeShapeBuilder;
+import com.xlip.threedtemp.Assets;
 
 
 /**
@@ -26,8 +27,8 @@ public abstract class DefaultModels extends com.badlogic.gdx.graphics.g3d.Model 
 
     public void init() {
         Material material = new Material();
-        material.set(new ColorAttribute(ColorAttribute.createDiffuse(Color.RED)));
-        material.set(new ColorAttribute(ColorAttribute.createSpecular(Color.RED)));
+        material.set(new ColorAttribute(ColorAttribute.createDiffuse(Assets.primaryColor)));
+        material.set(new ColorAttribute(ColorAttribute.createSpecular(Assets.primaryColor)));
         material.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 1));
 
         mb.begin();
