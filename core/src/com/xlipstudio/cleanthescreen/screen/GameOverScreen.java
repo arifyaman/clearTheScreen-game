@@ -17,6 +17,7 @@ public class GameOverScreen extends Screen {
     private static GameOverScreen instance = new GameOverScreen();
     private BitmapFont font;
     private HashMap<String, String> result;
+    private boolean win;
 
     public GameOverScreen() {
         super();
@@ -38,7 +39,7 @@ public class GameOverScreen extends Screen {
             int i = 1;
             for (String key : result.keySet()) {
                 if(key.equals("result")) {
-                    font.setColor(Assets.primaryColor);
+                    font.setColor(!win ? Assets.primaryColor : Assets.secondaryColor);
                     font.getData().setScale(2);
                     font.draw(spriteBatch, result.get(key), -165, 400);
                     font.setColor(Color.BLACK);
@@ -80,5 +81,13 @@ public class GameOverScreen extends Screen {
 
     public void setResult(HashMap<String, String> result) {
         this.result = result;
+    }
+
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
     }
 }

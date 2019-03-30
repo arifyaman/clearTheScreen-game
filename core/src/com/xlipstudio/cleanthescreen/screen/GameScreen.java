@@ -138,13 +138,13 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
         if (wrap.getResponse().isResult()) {
             Response response = wrap.getResponse();
             if (response.getCode().equals("100")) {
-                goToGameOverScreen(wrap);
+                goToGameOverScreen(wrap,true);
 
                 gameFinished = true;
                 inited = false;
                 return;
             } else if (response.getCode().equals("-100")) {
-                goToGameOverScreen(wrap);
+                goToGameOverScreen(wrap,false);
                 gameFinished = true;
                 inited = false;
                 return;
@@ -160,8 +160,9 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
     }
 
-    private void goToGameOverScreen(Wrap wrap) {
+    private void goToGameOverScreen(Wrap wrap, boolean win) {
         GameOverScreen screen = new GameOverScreen();
+        screen.setWin(win);
         screen.setResult(((HashMap) wrap.getResponse().getPayload()));
         CleanTheScreenGame.changeScreen(screen);
         CleanTheScreenGame.getAndroidUnit().getAdUnit().showInterstitial();
