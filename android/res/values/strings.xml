@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">cleanTheScreenGame</string>
+    <string name="app_name">Clear The Screen !</string>
     <string name="bottom_banner_id">ca-app-pub-1376626910808591/3794013159</string>
     <string name="top_banner_id">ca-app-pub-1376626910808591/7969417106</string>
     <string name="interstitial_id">ca-app-pub-1376626910808591/5845461424</string>
