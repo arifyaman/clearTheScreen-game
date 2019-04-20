@@ -22,7 +22,7 @@ public class DesktopLauncher {
         Client client = null;
         new LwjglApplication(game, config);
 
-        client = new Client(game, "a8ys791238hwdmf",  /*"51.38.126.60"*/   "localhost");
+        client = new Client(game, "a8ys791238hwdmf",  "51.38.126.60"  ) /*"localhost"*/;
         client.start();
         CleanTheScreenGame.setGameClient(client);
         CleanTheScreenGame.setAndroidUnit(game.getInnerAndroidUnit());

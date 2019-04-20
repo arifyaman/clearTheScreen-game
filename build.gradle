@@ -59,7 +59,9 @@ project(":android") {
     apply plugin: "android"
 
     configurations { natives }
-
+    repositories {
+        jcenter()
+    }
     dependencies {
         implementation project(":core")
         implementation project(":client")
