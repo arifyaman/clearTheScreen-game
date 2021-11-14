@@ -98,15 +98,21 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
     }
 
+    boolean touchedAlready = false;
+
 
     @Override
     public boolean touchDown(Vector2 vector2, Vector2 vector21) {
-        checkCells(vector2);
+        if(!touchedAlready)
+            checkCells(vector2);
+        touchedAlready = true;
+
         return false;
     }
 
     @Override
     public boolean touchUp(Vector2 vector2, Vector2 vector21) {
+        touchedAlready = false;
         return false;
     }
 

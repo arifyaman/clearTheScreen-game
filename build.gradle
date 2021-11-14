@@ -102,24 +102,12 @@ project(":core") {
 
 
 
-        implementation files('../../communication/build/libs/communication-1.0-SNAPSHOT.jar')
+        implementation files('../communication/communication-1.0-SNAPSHOT.jar')
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
 
     }
 }
 
-project(":ios-moe") {
-    apply plugin: "moe"
-
-    configurations { natives }
-
-    dependencies {
-        implementation project(":core")
-        implementation "com.badlogicgames.gdx:gdx-backend-moe:$gdxVersion"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
-
-    }
-}
 
 project(":html") {
     apply plugin: "gwt"
@@ -140,7 +128,7 @@ project(":client") {
 
 
     dependencies {
-        implementation files('../../communication/build/libs/communication-1.0-SNAPSHOT.jar')
+        implementation files('../communication/communication-1.0-SNAPSHOT.jar')
         compile project(":core")
 
     }
