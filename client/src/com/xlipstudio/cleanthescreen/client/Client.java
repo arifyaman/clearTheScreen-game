@@ -37,6 +37,15 @@ public class Client extends Thread implements GameClient {
 
     }
 
+    @Override
+    public void disconnect() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void read() {
         while (isConnected()) {
             try {

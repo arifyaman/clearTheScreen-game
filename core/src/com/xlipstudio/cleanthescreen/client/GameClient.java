@@ -8,5 +8,6 @@ public interface GameClient {
      void register();
      void start();
      boolean isConnected();
+     void disconnect();
 
 }

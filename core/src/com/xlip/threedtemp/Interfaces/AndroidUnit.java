@@ -33,6 +33,7 @@ public interface AndroidUnit {
         void showTopBanner();
         void showInterstitial();
         void hideBottomBanner();
+        void hideTopBanner();
     }
 
     interface AnalyticTracker{

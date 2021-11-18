@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion "28.0.3"
-    compileSdkVersion 28
+    buildToolsVersion "30.0.3"
+    compileSdkVersion 30
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -17,15 +17,16 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "com.xlipstudio.cleanthescreen"
-        minSdkVersion 14
-        targetSdkVersion 28
+        applicationId "tr.com.aruba.cleanthescreen"
+        minSdkVersion 16
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
     }
     buildTypes {
         release {
+            //shrinkResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -87,7 +88,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.xlipstudio.cleanthescreen/com.xlipstudio.cleanthescreen.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.xlipstudio.cleanthescreen/AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.
@@ -101,8 +102,8 @@ eclipse {
     }
 
     jdt {
-        sourceCompatibility = 1.6
-        targetCompatibility = 1.6
+        sourceCompatibility = 1.8
+        sourceCompatibility = 1.8
     }
 
     classpath {

@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">Clear The Screen !</string>
-    <string name="bottom_banner_id">ca-app-pub-1376626910808591/3794013159</string>
-    <string name="top_banner_id">ca-app-pub-1376626910808591/7969417106</string>
-    <string name="interstitial_id">ca-app-pub-1376626910808591/5845461424</string>
-    <string name="admob_app_id">ca-app-pub-1376626910808591~6611748183</string>
-    <string name="testDeviceId">8B38716ED3424B00A56DF9EF0D47DE7C</string>
+    <string name="bottom_banner_id">ca-app-pub-8973204886540053/8518492614</string>
+    <string name="top_banner_id">ca-app-pub-8973204886540053/2144655959</string>
+    <string name="interstitial_id">ca-app-pub-8973204886540053/5700757587</string>
+    <string name="admob_app_id">ca-app-pub-8973204886540053~8710064302</string>
+    <string name="testDeviceId">C9358B3CB5F00D70563904418C34DEFA</string>
 </resources>

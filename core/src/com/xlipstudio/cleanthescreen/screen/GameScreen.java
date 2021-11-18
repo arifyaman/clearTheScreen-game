@@ -60,6 +60,10 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
 
         initCells();
         inited = true;
+
+        CleanTheScreenGame.getAndroidUnit().getAdUnit().hideBottomBanner();
+        CleanTheScreenGame.getAndroidUnit().getAdUnit().hideTopBanner();
+
     }
 
     private void initCells() {
@@ -126,7 +130,7 @@ public class GameScreen extends Screen implements MyInputProcessor.MyInputCallba
     private void checkCells(Vector2 pos) {
         if(!gameFinished){
             for (Cell cell : cells.values()) {
-                if (cell.isIn(pos)) {
+                if (cell.isIn(pos) && !cell.isDestroyed()) {
                     Wrap wrap = new Wrap(WrapType.REQUEST, new Request(RequestType.DELETE_CELL, cell.getId()));
 
                     CleanTheScreenGame.getGameClient().dispatchWrap(wrap);

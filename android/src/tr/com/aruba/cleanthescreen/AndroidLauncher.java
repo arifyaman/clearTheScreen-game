@@ -1,4 +1,4 @@
-package com.xlipstudio.cleanthescreen;
+package tr.com.aruba.cleanthescreen;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.widget.Toast;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.xlip.threedtemp.Interfaces.AndroidUnit;
-import com.xlipstudio.cleanthescreen.ads.AdInitializer;
+import com.xlipstudio.cleanthescreen.CleanTheScreenGame;
+import tr.com.aruba.cleanthescreen.ads.AdInitializer;
 import com.xlipstudio.cleanthescreen.client.Client;
 import com.xlipstudio.cleanthescreen.client.GameClient;
 
@@ -18,6 +19,7 @@ import java.util.concurrent.ExecutionException;
 
 public class AndroidLauncher extends AndroidApplication implements AndroidUnit {
     private AdInitializer adInitializer;
+    private GameClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class AndroidLauncher extends AndroidApplication implements AndroidUnit {
 
 
         try {
-            GameClient client = new StartGameClient().execute(game).get();
+            client = new StartGameClient().execute(game).get();
             if (client != null) {
                 CleanTheScreenGame.setGameClient(client);
 
@@ -52,6 +54,11 @@ public class AndroidLauncher extends AndroidApplication implements AndroidUnit {
 
     }
 
+    @Override
+    public void exit() {
+        client.disconnect();
+        super.exit();
+    }
 
     class StartGameClient extends AsyncTask<CleanTheScreenGame, Void, GameClient> {
 
@@ -63,6 +70,7 @@ public class AndroidLauncher extends AndroidApplication implements AndroidUnit {
                         Settings.Secure.ANDROID_ID);
 
                 final Client client = new Client(games[0], android_id, "51.38.126.60" /*"10.0.2.2"*/);
+                //final Client client = new Client(games[0], android_id, "192.168.1.24" /*"10.0.2.2"*/);
                 client.start();
 
 

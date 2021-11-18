@@ -6,12 +6,12 @@ buildscript {
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        jcenter()
+        //jcenter()
         google()
     }
     dependencies {
         classpath 'org.wisepersist:gwt-gradle-plugin:1.0.6'
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.5'
         classpath 'org.multi-os-engine:moe-gradle:1.4.0'
 
@@ -60,14 +60,13 @@ project(":android") {
 
     configurations { natives }
     repositories {
-        jcenter()
+        //jcenter()
     }
     dependencies {
         implementation project(":core")
         implementation project(":client")
         implementation "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
-        implementation 'com.google.android.gms:play-services-ads:17.2.0'
-        implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+        implementation 'com.google.android.gms:play-services-ads-lite:20.2.0'
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
@@ -102,7 +101,7 @@ project(":core") {
 
 
 
-        implementation files('../communication/communication-1.0-SNAPSHOT.jar')
+        implementation group: 'com.xlipstudio.cleanthescreen', name: 'cleanthescreen-communication', version: '1.0-SNAPSHOT'
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
 
     }
@@ -128,8 +127,8 @@ project(":client") {
 
 
     dependencies {
-        implementation files('../communication/communication-1.0-SNAPSHOT.jar')
-        compile project(":core")
+        implementation group: 'com.xlipstudio.cleanthescreen', name: 'cleanthescreen-communication', version: '1.0-SNAPSHOT'
+        implementation project(":core")
 
     }
 }

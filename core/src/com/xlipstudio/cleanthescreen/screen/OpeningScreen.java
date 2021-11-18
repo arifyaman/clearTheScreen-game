@@ -23,8 +23,7 @@ public class OpeningScreen extends Screen {
         this.myInputProcessor = new MyInputProcessor(this);
         menu = new OpeningMenu();
         setMenu(menu);
-        CleanTheScreenGame.getAndroidUnit().getAdUnit().showBottomBanner();
-        CleanTheScreenGame.getAndroidUnit().getAdUnit().showTopBanner();
+
 
     }
 
@@ -39,6 +38,9 @@ public class OpeningScreen extends Screen {
     public void initialized() {
         Gdx.input.setInputProcessor(myInputProcessor);
         setClearColor(Color.WHITE);
+
+        CleanTheScreenGame.getAndroidUnit().getAdUnit().showBottomBanner();
+        CleanTheScreenGame.getAndroidUnit().getAdUnit().showTopBanner();
     }
 
    /* @Override

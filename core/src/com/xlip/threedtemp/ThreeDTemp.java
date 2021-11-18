@@ -97,6 +97,11 @@ public abstract class ThreeDTemp extends ApplicationAdapter implements SplashScr
                     public void showTopBanner() {
 
                     }
+
+                    @Override
+                    public void hideTopBanner() {
+
+                    }
                 };
             }
 
