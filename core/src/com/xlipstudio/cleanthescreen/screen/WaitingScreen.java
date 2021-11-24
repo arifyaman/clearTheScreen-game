@@ -49,6 +49,10 @@ public class WaitingScreen extends Screen {
 
         Gdx.input.setInputProcessor(myInputProcessor);
         setClearColor(Color.YELLOW);
+        try {
+            CleanTheScreenGame.getAndroidUnit().getAdUnit().hideBottomBanner();
+        } catch (Exception ignore) {}
+
     }
 
 
